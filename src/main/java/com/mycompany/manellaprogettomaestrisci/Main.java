@@ -9,6 +9,7 @@ package com.mycompany.manellaprogettomaestrisci;
  *
  * @author Marta Manella
  */
-public class Main {
+public class Main 
+{
     
 }
