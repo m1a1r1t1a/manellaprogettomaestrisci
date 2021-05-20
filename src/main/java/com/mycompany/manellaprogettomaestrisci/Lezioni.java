@@ -5,7 +5,14 @@
  */
 package com.mycompany.manellaprogettomaestrisci;
 
+import Eccezioni.FileException;
 import java.time.LocalDateTime;
+import eccezioni.*;
+import java.io.IOException;
+import file.TextFile;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 
 /**
  *
@@ -50,7 +57,11 @@ public class Lezioni
         nPrenotazioniPresenti--;
         
     }
-    
+    public  Prenotazioni  getPrenotazioniPosizione ( int  posizione )
+    {
+        return elencoPrenotazioni [posizione];
+    }
+
      
      public int eliminaPosizione (int codice)
      {
@@ -106,7 +117,35 @@ public class Lezioni
          return prenotazioniGiorno;
      }
      
+     //public Prenotazioni[] visualizzaOrePrenotate()
      
+     
+     
+     
+      public  void  salvaPrenotazioni ( String  nomeFile ) throws IOException, FileException  
+    {
+        
+       TextFile f1=new TextFile(nomeFile,'W'); 
+       Prenotazioni prenotazioni;
+        for ( int i = 0 ; i < nPrenotazioniPresenti; i ++ )
+            {
+               prenotazioni = getPrenotazioniPosizione (i);
+                if (prenotazioni != null )
+                {
+                    f1 . toFile (prenotazioni . getCodice () + " ; " + prenotazioni . getData () + ";" + prenotazioni . getNome () + ";" + prenotazioni . getCognome () + ";" + prenotazioni . getNomeMaestro() + " ; " +prenotazioni. getCognomeMaestro () + " ; " );
+                }
+            }
+        f1.close();
+    }
+
+    public void salvaRevisioneBin(String nomeFile) throws IOException, FileException
+    {
+        FileOutputStream f1=new FileOutputStream(nomeFile);
+        ObjectOutputStream writer=new ObjectOutputStream(f1);
+        writer.writeObject(this);
+        writer.flush();
+        writer.close();
+    }
      
 
     
