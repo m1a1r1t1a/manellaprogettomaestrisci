@@ -9,74 +9,71 @@ import java.util.Scanner;
 
 /**
  *
- * @author User
+ * @author Marta Manella
  */
 public class Menu 
 {
     private String[] elencoVoci;
     private int numeroVoci;
-    
+
     public Menu(String[] elencoVoci)
     {
         numeroVoci=elencoVoci.length;
         this.elencoVoci=new String[numeroVoci];
-        for (int i=0;i<numeroVoci;i++)
+        for(int i=0;i<numeroVoci;i++)
             this.elencoVoci[i]=elencoVoci[i];
     }
     
     public void visualizzaMenu()
     {
         System.out.println("MENU:");
-        for (int i=0;i<numeroVoci;i++)
-            System.out.println(i+" --> "+this.elencoVoci[i]);
+        for(int i=0;i<numeroVoci;i++)
+        {
+            System.out.println(i+" --> "+elencoVoci[i]);
+        }
     }
-    
     public int sceltaMenu()
     {
+        Scanner tastiera=new Scanner(System.in);
         String inputUtente;
-        boolean inputUtenteOK=true;
         int sceltaUtente=0;
-        
-        
-        
+        boolean inputUtenteOk=true;
         do
-        {   
+        {
             visualizzaMenu();
-            Scanner tastiera=new Scanner(System.in);
-            System.out.println("Scelta -->");
+            System.out.println("Scelta --> ");
             inputUtente=tastiera.nextLine();
-
-
-            //verifico se l'inputUtente è un numero
-            inputUtenteOK=true;
-            for (int i=0;i<inputUtente.length();i++)
+            //verifico che l'input sia numerico
+            inputUtenteOk=true;
+            for(int i=0;i<inputUtente.length();i++)
             {
-                if (inputUtente.charAt(i)>='0' && inputUtente.charAt(i)<='9')
+                if(inputUtente.charAt(i)>='0' && inputUtente.charAt(i)<='9')
                     i++;
                 else
                 {
-                    inputUtenteOK=false;
-                    break; 
-                }     
+                    inputUtenteOk=false;
+                    break;
+                }
             }
-
-            //verifico se il numero inserito è compreso fra 0 e il numero di voci del menu -1
-            if (inputUtenteOK)
+                    //verifico che il numero sia valido
+            if(inputUtenteOk)
             {
                 sceltaUtente=Integer.parseInt(inputUtente);
-                if (sceltaUtente<0 || sceltaUtente>numeroVoci-1)
-                    inputUtenteOK=false;
+                if(sceltaUtente<0||sceltaUtente>numeroVoci-1)
+                    inputUtenteOk=false;
             }
-            
-            if (!inputUtenteOK)
+            if(!inputUtenteOk)
             {
-                System.out.println("Valore inserito non valido. Premi invio ed effettua nuovamente la scelta");
+                System.out.println("il valore inserito non e' corretto. premi invio e reinserisci la tua scelta");
                 tastiera.nextLine();
+
             }
-  
-        }while(!inputUtenteOK);
-        
+
+        }while(!inputUtenteOk);
         return sceltaUtente;
-    }
-}
+
+    }  
+    
+}   
+
 
