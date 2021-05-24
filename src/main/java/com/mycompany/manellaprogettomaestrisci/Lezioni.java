@@ -12,6 +12,7 @@ import java.io.IOException;
 import file.TextFile;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
@@ -19,7 +20,7 @@ import java.time.LocalDate;
  *
  * @author Marta Manella
  */
-public class Lezioni 
+public class Lezioni implements Serializable
 {
     private Prenotazioni[] elencoPrenotazioni;
     public int nPrenotazioniPresenti;
